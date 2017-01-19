@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <title>VMWARESIS SECURITY</title>
+    <!-- end: META -->
+    <!-- start: GOOGLE FONTS -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+    <!-- end: GOOGLE FONTS -->
+    <!-- start: MAIN CSS -->
+    <link rel="stylesheet" href="css/thumbnail-gallery.css">
+    <link rel="stylesheet" href="Plugins/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Plugins/vendor/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="Plugins/vendor/themify-icons/themify-icons.min.css">
+    <link href="Plugins/vendor/animate.css/animate.min.css" rel="stylesheet" media="screen">
+    <link href="Plugins/vendor/perfect-scrollbar/perfect-scrollbar.min.css" rel="stylesheet" media="screen">
+    <link href="Plugins/vendor/switchery/switchery.min.css" rel="stylesheet" media="screen">
+    <link href="Plugins/vendor/sweetalert/sweet-alert.css" rel="stylesheet" media="screen">
+    <!-- PLUGIN DATETIMEPICKER-->
+    <link href="Plugins/vendor/bootstrap-datepicker/bootstrap-datepicker3.standalone.min.css" rel="stylesheet" media="screen">
+    <link href="Plugins/vendor/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet" media="screen">
+    <!---->
+    <!-- end: MAIN CSS -->
+    <link href="Plugins/vendor/select2/select2.min.css" rel="stylesheet" media="screen">
+    <!-- start: CLIP-TWO CSS -->
+    <link rel="stylesheet" href="Plugins/assets/css/styles.css">    
+    <link rel="stylesheet" href="Plugins/assets/css/plugins.css">
+    <link rel="stylesheet" href="Plugins/assets/css/themes/theme-1.css" />
+
+    <link href="css/styles.css" rel="stylesheet" />
+     
+    <link href="Plugins/pnotify/css/pnotify.custom.min.css" rel="stylesheet" />
+  
+
+    <!-- end: CLIP-TWO CSS -->
+    <!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
+    <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
+
+</head>
+<body ng-app="MyApp">
+    <div id="app" ng-controller="ctrlIndex">
+        <!-- sidebar -->
+        <div class="sidebar app-aside" id="sidebar">
+            <div class="sidebar-container perfect-scrollbar">
+                <nav>
+                    <!-- start: SEARCH FORM -->
+                    <div class="search-form">
+                        <a class="s-open" href="#">
+                            <i class="ti-search"></i>
+                        </a>
+                        <form class="navbar-form" role="search">
+                            <a class="s-remove" href="#" target=".navbar-form">
+                                <i class="ti-close"></i>
+                            </a>
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model="txtBusquedaMenu" placeholder="Busqueda...">
+                                <button class="btn search-button" type="submit">
+                                    <i class="ti-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- end: SEARCH FORM -->
+                    <!-- start: MAIN NAVIGATION MENU -->
+         
+                    <ul class="main-navigation-menu">
+                        <li class="active open">
+                            <a href="#">
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <i class="ti-home"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <span class="title"> INICIO </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+
+                        <li ng-repeat="item in listaPermisos ">
+                            <a href="javascript:void(0)">
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <i ng-class="{{item.url}}"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <span class="title" style="text-transform:capitalize !important;">{{item.page_principal}}</span><i class="icon-arrow"></i>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <ul class="sub-menu">
+
+                                <li ng-repeat="itemChild in item.listWeb | filter: txtBusquedaMenu">
+                                    <a href="{{itemChild.url_page}}">
+                                        <span class="title"> {{itemChild.nombre_page}} </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+            
+                </nav>
+            </div>
+        </div>
+        <!-- / sidebar -->
+        <div class="app-content">
+            <!-- start: TOP NAVBAR -->
+            <header class="navbar navbar-default navbar-static-top">
+                <!-- start: NAVBAR HEADER -->
+                <div class="navbar-header">
+                    <a href="#" class="sidebar-mobile-toggler pull-left hidden-md hidden-lg" class="btn btn-navbar sidebar-toggle" data-toggle-class="app-slide-off" data-toggle-target="#app" data-toggle-click-outside="#sidebar">
+                        <i class="ti-align-justify"></i>
+                    </a>
+                    <a class="navbar-brand" href="http://www.cobraperu.com/Proyecto/Login/Modulo">
+                        <h2 class="padding-top-15 toast-title">SHALOM</h2>
+                    </a>
+                    <a href="#" class="sidebar-toggler pull-right visible-md visible-lg" data-toggle-class="app-sidebar-closed" data-toggle-target="#app">
+                        <i class="ti-align-justify"></i>
+                    </a>
+                    <a class="pull-right menu-toggler visible-xs-block" id="menu-toggler" data-toggle="collapse" href=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <i class="ti-view-grid"></i>
+                    </a>
+                </div>
+                <!-- end: NAVBAR HEADER -->
+                <!-- start: NAVBAR COLLAPSE -->
+                <div class="navbar-collapse collapse">
+                    <!-- start: DASHBOARD TITLE -->
+                    <section id="page-title" class="padding-top-15 padding-bottom-15">
+                        <div class="row">
+                            <div class="col-sm-7">
+                               
+
+                                <span class="mainDescription">Busqueda de Reservas</span>
+
+                            </div>
+
+                        </div>
+                    </section>
+                    <ul class="nav navbar-right" style="bottom:65px !important;">
+                      
+                        <li class="dropdown">
+   
+                            <ul class="dropdown-menu dropdown-light dropdown-messages dropdown-large">
+                                <li>
+                                    <span class="dropdown-header"> You have new notifications</span>
+                                </li>
+                                <li>
+                                    <div class="drop-down-wrapper ps-container">
+                                        <div class="list-group no-margin">
+                                            <a class="media list-group-item" href="">
+                                                <img class="img-circle" alt="..." src="../Plugins/assets/images/avatar-1.jpg">
+                                                <span class="media-body block no-margin"> Use awesome animate.css <small class="block text-grey">10 minutes ago</small> </span>
+                                            </a>
+                                            <a class="media list-group-item" href="">
+                                                <span class="media-body block no-margin"> 1.0 initial released <small class="block text-grey">1 hour ago</small> </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="view-all">
+                                    <a href="#">
+                                        See All
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- end: ACTIVITIES DROPDOWN -->
+                        <!-- start: LANGUAGE SWITCHER -->
+                        <li class="dropdown">
+                          
+                            <ul role="menu" class="dropdown-menu dropdown-light fadeInUpShort">
+                                <li>
+                                    <a href="#" class="menu-toggler">
+                                        Deutsch
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="menu-toggler">
+                                        English
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="menu-toggler">
+                                        Italiano
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- start: LANGUAGE SWITCHER -->
+                        <!-- start: USER OPTIONS DROPDOWN -->
+                        <li class="dropdown current-user">
+                            <a href class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="img/photo.jpg" alt=" peter"> <span class="username">{{userName}}<i class="ti-angle-down"></i></i></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-dark">
+                                <li>
+                                    <a href="pages_user_profile.html">
+                                        My Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="pages_calendar.html">
+                                        My Calendar
+                                    </a>
+                                </li>
+                                <li>
+                                    <a hef="pages_messages.html">
+                                        My Messages (3)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="login_lockscreen.html">
+                                        Lock Screen
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="login_signin.html">
+                                        Log Out
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- end: USER OPTIONS DROPDOWN -->
+                    </ul>
+                    <!-- start: MENU TOGGLER FOR MOBILE DEVICES -->
+                    <div class="close-handle visible-xs-block menu-toggler" data-toggle="collapse" href=".navbar-collapse">
+                        <div class="arrow-left"></div>
+                        <div class="arrow-right"></div>
+                    </div>
+                    <!-- end: MENU TOGGLER FOR MOBILE DEVICES -->
+                </div>
+                <a class="dropdown-off-sidebar sidebar-mobile-toggler hidden-md hidden-lg" data-toggle-class="app-offsidebar-open" data-toggle-target="#app" data-toggle-click-outside="#off-sidebar">
+                    &nbsp;
+                </a>
+                <!--<a class="dropdown-off-sidebar hidden-sm hidden-xs" data-toggle-class="app-offsidebar-open" data-toggle-target="#app" data-toggle-click-outside="#off-sidebar">
+                    &nbsp;
+                </a>-->
+                <!-- end: NAVBAR COLLAPSE -->
+            </header>
+            <!-- end: TOP NAVBAR -->
+            <div class="main-content" style="height: 1000px;
+    overflow: auto;
+">
+            <!-- CONTAINER PRINCIPAL -->
+
+                <div class="wrap-content container" id="container">
+                <fieldset style="padding-bottom:13px !important;padding-top:10px !important;">
+                    <legend>Datos Generales</legend>
+
+                </fieldset>
+                     <fieldset style="padding-bottom:13px !important;padding-top:10px !important;">
+            <legend class="legentDsige" ng-show="showTable">
+                Datos Generales
+            </legend>
+
+    <div id="modal-Ayuda2" class="modal fade bs-example-modal-lg" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header modal-header-info">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h6 class="modal-title"><i class="fa fa-cogs fa-lg"></i>Detalle de Actividad por Ubicación</h6>
+                </div>
+                <div class="modal-body">
+
+                <div class="modal-footer">
+                    <button role="button" id="btnCancelar" class="btn btn-default" style="background-color: #fff;" data-dismiss="modal"><i class="fa fa-close fa-lg"></i>Retornar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <!-- start: MAIN JAVASCRIPTS -->
+    <script src="Plugins/vendor/jquery/jquery.min.js"></script>
+    <script src="Plugins/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="Plugins/vendor/maskedinput/jquery.maskedinput.min.js"></script>
+    <script src="Plugins/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="Plugins/vendor/autosize/autosize.min.js"></script>
+    <script src="Plugins/vendor/select2/select2.min.js"></script>
+    <script src="Plugins/encriptacion/encriptarvar.js"></script>
+    <script src="Plugins/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB46M5tvv5gb8JlAy0XLQl4XWVwZQUtCa4"></script>
+    <script src="Plugins/angular/angular.js"></script>
+    <script src="Plugins/maps/ng-map.js"></script>
+    <script src="Plugins/vendor/angular-uploader/angular-file-upload-shim.js"></script>
+    <script src="Plugins/vendor/angular-uploader/angular-file-upload.js"></script>
+    <script src="Plugins/vendor/modernizr/modernizr.js"></script>
+    <script src="Plugins/vendor/jquery-cookie/jquery.cookie.js"></script>
+    <script src="Plugins/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="Plugins/vendor/switchery/switchery.min.js"></script>
+    <script src="Plugins/assets/js/form-validation.js"></script>
+    <!-- end: MAIN JAVASCRIPTS -->
+    <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+    <script src="Plugins/vendor/Chart.js/Chart.min.js"></script>
+    <script src="Plugins/vendor/jquery.sparkline/jquery.sparkline.min.js"></script>
+    <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+    <!-- start: CLIP-TWO JAVASCRIPTS -->
+    <script src="Plugins/assets/js/main.js"></script>
+    <script src="Plugins/assets/js/form-elements.js"></script>
+    <!-- start: JavaScript Event Handlers for this page -->
+    <script src="Plugins/assets/js/index.js"></script>
+    <script src="Plugins/vendor/sweetalert/sweet-alert.min.js"></script>
+    <script src="Plugins/assets/js/ui-notifications.js"></script>
+    <!-- PLUGIN DATETIMEPICKER-->
+
+
+    <script src="Plugins/vendor/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="Plugins/vendor/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="Plugins/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+
+    <!-- fin-->
+    <script src="js/App.js"></script>
+    <script src="js/Controller.js"></script>
+
+    <script src="Plugins/pnotify/js/pnotify.custom.min.js"></script>
+
+    <!-- TODOS LOS SERVICIOS QUE UTILIZAREMOS-->
+   
+
+    <!-- FIN DE SERVICIOS-->
+    <script>
+        jQuery(document).ready(function () {
+            Main.init();
+            Index.init();
+            UINotifications.init();
+            FormElements.init();
+        });
+    </script>
+    <!-- end: JavaScript Event Handlers for this page -->
+    <!-- end: CLIP-TWO JAVASCRIPTS -->
+</body>
+</html>
