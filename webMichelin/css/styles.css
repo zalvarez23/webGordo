@@ -20,7 +20,9 @@
         width: 98%;
         position: absolute;
     }
-
+.container label{
+  font-size:11px;
+}
 .avatark {
     height: 120px;
     width: 120px;
@@ -78,6 +80,9 @@ input[type="radio"]:checked ~ label {
 .disabledContent {
     pointer-events: none;
     opacity: 0.6;
+}
+.disabledContent2{
+  pointer-events:none;
 }
 .fieldDsige {
     padding-top: 10px !important;

@@ -252,15 +252,96 @@
 ">
             <!-- CONTAINER PRINCIPAL -->
 
-                <div class="wrap-content container" id="container">
-                <fieldset style="padding-bottom:13px !important;padding-top:10px !important;">
+                <div class="wrap-content container " id="container">
+                    <br>
+                <fieldset class="disabledContent2" ng-show="reservaShow" style="padding-bottom:13px !important;padding-top:10px !important;">
+                    <legend>Datos Generales</legend>
+                    <div class="form-group row">
+                      <label for="example-text-input" class="col-2 col-form-label">Nombres</label>
+                      <div class="col-10">
+                        <input class="form-control" type="text" ng-model="userName">
+                      </div>
+                     <label for="example-text-input" class="col-2 col-form-label">Dirección</label>
+                      <div class="col-10">
+                        <input class="form-control" type="text" ng-model="dataUser.DIRECCION">
+                      </div>
+                     <label for="example-text-input" class="col-2 col-form-label">DNI</label>
+                      <div class="col-10">
+                        <input class="form-control" type="text" ng-model="dataUser.DNI">
+                      </div>
+                     <label for="example-text-input" class="col-2 col-form-label">Edad</label>
+                      <div class="col-10">
+                        <input class="form-control" type="text" ng-model="dataUser.EDAD">
+                      </div>                                                                                       
+                    </div>
+                </fieldset>
+                <fieldset class="" ng-show="reservaShow" style="padding-bottom:13px !important;padding-top:10px !important;">
+                    <legend>Otros Datos</legend>
+                    <div class="form-group row">
+                      <label for="example-text-input" class="col-2 col-form-label">
+                        Reservas realizadas <span> <a href="">Ver</a> </span></label>
+                        <br>
+                     <label for="example-text-input" class="col-2 col-form-label">Mis puntos <span> <a href="">Ver</a> </span></label>
+                      <br>
+                     <label for="example-text-input" class="col-2 col-form-label">Mis Promosiones <span> <a href="">Ver</a> </span></label>
+                                                                                                        
+                    </div>
+                </fieldset>  
+                <button type="button" ng-show="reservaShow" class="btn btn-primary active" ng-click="nuevaReserva();">Generar Nueva Reserva</button>
+                <button type="button" ng-show="atrasShow" ng-click="volver();" class="btn btn-primary active" ng-click="nuevaReserva();">Volver</button>
+ 
+                <fieldset ng-show="atrasShow" style="padding-bottom:13px !important;padding-top:10px !important;">
                     <legend>Datos Generales</legend>
 
+                    <div class="form-group row">
+                      <label for="example-text-input" class="col-2 col-form-label">Origen</label>
+                      <div class="col-10">
+                          <select id="disabledSelect" class="form-control">
+                    <option>Disabled select</option>
+                  </select>
+                      </div>
+                     <label for="example-text-input" class="col-2 col-form-label">Destino</label>
+                      <div class="col-5">
+                         <select id="disabledSelect" class="form-control">
+                        <option>Disabled select</option>
+                        <option>Disabled 12321</option>
+                      </select>
+                      </div>
+                     <label for="example-text-input" class="col-2 col-form-label">Salidas</label>
+                      <div class="col-10">
+                         <select id="disabledSelect" class="form-control">
+                            <option>Disabled select</option>
+                          </select>
+                      </div>
+                     <label for="example-text-input" class="col-2 col-form-label">Ida</label>
+                      <div class="col-10">
+                          <div class="col-10">
+                                                <p class="input-group input-append datepicker date">
+                            <input type="text" id="dtp_fechaini" class="form-control input-sm FormatoFecha"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default btn-sm FormatoFecha" disabled>
+                                    <i class="glyphicon glyphicon-calendar FormatoFecha"></i>
+                                </button>
+                            </span>
+                        </p>
+                      </div>
+                      </div>  
+                     <label for="example-text-input" class="col-2 col-form-label">Retorno</label>
+                      <div class="col-10">
+                          <div class="col-10">
+                                                <p class="input-group input-append datepicker date">
+                            <input type="text" id="dtp_fechaini" class="form-control input-sm FormatoFecha"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default btn-sm FormatoFecha" disabled>
+                                    <i class="glyphicon glyphicon-calendar FormatoFecha"></i>
+                                </button>
+                            </span>
+                        </p>
+                      </div>
+                      </div>         
+                    </div>
+                    <button type="button" ng-show="atrasShow" class="btn btn-primary active" ng-click="nuevaReserva();">Buscar Itinerarios</button>                     
                 </fieldset>
-                     <fieldset style="padding-bottom:13px !important;padding-top:10px !important;">
-            <legend class="legentDsige" ng-show="showTable">
-                Datos Generales
-            </legend>
 
     <div id="modal-Ayuda2" class="modal fade bs-example-modal-lg" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog modal-lg">

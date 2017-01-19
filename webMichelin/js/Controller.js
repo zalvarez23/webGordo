@@ -28,8 +28,17 @@ angular.module('MyApp', ['ngMap'])
 
 	var dataUser = JSON.parse(localStorage.getItem('dataUser'))[0];
 	$scope.userName = dataUser.NOMBRE_PERSONA + ' ' + dataUser.APELLIDOS_PERSONA;
-	
-
+	$scope.dataUser = dataUser;
+	$scope.reservaShow = true;
+	$scope.atrasShow = false;
+	$scope.nuevaReserva = function(){
+		$scope.reservaShow = false;
+		$scope.atrasShow = true;
+	}
+	$scope.volver= function(){
+		$scope.reservaShow = true;
+		$scope.atrasShow = false;
+	}
 
 	$scope.listaActividades = function(){		
 
