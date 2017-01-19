@@ -1,3 +1,4 @@
+var urlApi = "http://167.250.205.67/Controladores/";
 function getVariables(){
 
 	var datos = location.search; 
@@ -20,12 +21,22 @@ if(mm<10) {
   hoy = yyyy+'-'+mm+'-'+dd;
   return hoy;
 }
-var urls = "http://vmwaresis.com.pe/movil/Controladores/";
+
 
 angular.module('MyApp', ['ngMap'])
 
 .controller('ctrlIndex',function($scope,$http,$timeout,NgMap,$rootScope,$timeout){
 
+	setTimeout(function () {
+        $(document).ready(function () {
+           
+            $('input.FormatoFecha').datepicker({
+                language: "es",
+                format: "dd/mm/yyyy",
+                autoclose: true
+            });
+        });
+    }, 100);
 	var dataUser = JSON.parse(localStorage.getItem('dataUser'))[0];
 	$scope.userName = dataUser.NOMBRE_PERSONA + ' ' + dataUser.APELLIDOS_PERSONA;
 	$scope.dataUser = dataUser;
@@ -35,50 +46,99 @@ angular.module('MyApp', ['ngMap'])
 		$scope.reservaShow = false;
 		$scope.atrasShow = true;
 	}
+	 $scope.paramsReserva = {
+	    idOrigen : '',
+	    idDestino : '',
+	    idtipo : '',
+	    fechaP : '',
+	    fechaR : '',
+	  }	
+    $scope.listSalidas = [
+      {id : 1, des: 'Ida'},
+      {id : 2, des: 'Ida / Retorno'},
+    ]
 	$scope.volver= function(){
 		$scope.reservaShow = true;
 		$scope.atrasShow = false;
 	}
-
-	$scope.listaActividades = function(){		
-
-		var params = {
-			condicion : condicion,
-			fe_ini : fechaini.value.split('/').reverse().join('-'),
-			//fe_ini : '01-01-2015',
-			fe_fin : fechafin.value.split('/').reverse().join('-'),
-			co_tecn : co_tecn
+	$scope.changeValueSalida  = function(){
+		console.log($scope.paramsReserva.idtipo)
+		if ($scope.paramsReserva.idtipo == 1) {
+			$scope.showFechaRetorno = false;
+		}else{
+			$scope.showFechaRetorno = true;
 		}
-		var url = urls + "listaActividadesWeb.php";
-		
-		$http.post(url,params,{
-	              headers : {
-	                'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-	            }}).success(function(result){
-
-	            	$scope.listActividades = [];
-	            	$scope.listActividades = result;
-
-	            	angular.forEach(result, function(item, key) {
-						    if (item.st_acti == 1) {
-						    	if (item.status == 0) {
-						    		item.estadoDes = 'Descartado';
-						    	}else{
-						    		item.estadoDes = 'Pendiente';
-						    	}
-						    }else if(item.st_acti == 2){
-						      item.estadoDes = 'Proceso';
-						    }else if(item.st_acti == 0){
-						    	item.estadoDes = 'Concretado'
-						    };	            		
-	            	
-	            	})            
-	            	
-	            	$scope.showLoadingAct= false
-	            }).error(function(err){
-	            	
-	            })
 	}
+	$scope.getCiudades = function(){
+
+	    var url = urlApi + 'listCiudades.php';    
+	    $http.get(url,{
+	              headers : {
+	             'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+	            }}).success(function(result){  
+	            console.log(result)            
+	              $scope.listCiudades = result;
+	            })  
+	            .error(function(err){
+	              console.log(err)
+	            }) 
+	  }
+    $scope.getHistorial = function(){
+     var url = urlApi + 'listHistorial.php';
+     var params = {
+      pesona : dataUser.ID_PERSONA
+    }
+    
+    $http.post(url,params,{
+              headers : {
+                'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+            }}).success(function(result){
+              if (result[0] == "ERROR") {
+                $scope.cantidadReservas = 0;
+                $scope.puntosRealizados = 0;
+                return;
+              }          
+              $scope.cantidadReservas = result.length;
+              $scope.puntosRealizados = 100 * parseInt(result.length);
+            }).error(function(err){
+               $ionicPopup.alert({
+                  title : 'Error . .',
+                  template : 'Ocurrio un problema con la conexión..'
+                })
+            })
+    }	  
+
+  	$scope.getReservas = function(){
+  	var fechaP = $scope.paramsReserva.fechaP.split('/').reverse().join('-');
+  	var fechaR = $scope.paramsReserva.fechaR.split('/').reverse().join('-');  	
+  	var params = {
+  	    idOrigen : $scope.paramsReserva.idOrigen,
+	    idDestino : $scope.paramsReserva.idDestino,
+	    idtipo : $scope.paramsReserva.idtipo,
+	    fechaP : fechaP,
+	    fechaR : fechaR
+  	}
+    var url = urlApi + 'listViajes.php';    
+	    $http.post(url,params,{
+	              headers : {
+	             'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+	            }}).success(function(result){
+	            	console.log(result)
+	            	if (result[0] == "ERROR") {
+	            		$scope.listViajes = [];
+	            		return;
+	            	}
+					console.log(result);
+					$scope.listViajes = result;
+	            })  
+	            .error(function(err){
+	              console.log(err)
+	            })    		
+  	}
+
+  	$scope.getCiudades();
+  	$scope.getHistorial();
+
 
 })
 
